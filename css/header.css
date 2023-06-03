@@ -1,0 +1,24 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px 5px 10px 5px;
+  border-bottom: 2px solid #d3d6da;
+}
+
+.top-image-left {
+  width: 25px;
+}
+
+.top-image-right {
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-word {
+  font-size: 30px;
+  font-weight: bold;
+}
