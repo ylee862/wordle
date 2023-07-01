@@ -3,11 +3,43 @@ let index = 0;
 let timer;
 
 function appStart() {
+  const displayCorrect = () => {
+    const div = document.createElement("div");
+    div.innerText = "Correct";
+    div.style =
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:42vw; background-color:white; width:250px; height:50px; border-radius: 5px; font-weight: bold; font-size: 30px;";
+    div.animate(
+      [
+        // keyframes
+        { transform: "translateY(0px)" },
+        { transform: "translateY(-300px)" },
+      ],
+      {
+        // timing options
+        duration: 1000,
+        iterations: Infinity,
+      }
+    );
+    document.body.appendChild(div);
+  };
+
   const displayGameover = () => {
     const div = document.createElement("div");
-    div.innerText = "game over";
+    div.innerText = "Gameover";
     div.style =
-      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:43.5vw; background-color:white; width:200px; height:50px; font-weight: bold; font-size: 15px;";
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:42vw; background-color:white; width:250px; height:50px; border-radius: 5px; font-weight: bold; font-size: 30px;";
+    div.animate(
+      [
+        // keyframes
+        { transform: "translateY(0px)" },
+        { transform: "translateY(-300px)" },
+      ],
+      {
+        // timing options
+        duration: 1000,
+        iterations: Infinity,
+      }
+    );
     document.body.appendChild(div);
   };
 
@@ -17,8 +49,14 @@ function appStart() {
     clearInterval(timer);
   };
 
+  const correctAns = () => {
+    window.removeEventListener("keydown", handleKeydown);
+    displayCorrect();
+    clearInterval(timer);
+  };
+
   const nextLine = () => {
-    if (attempts === 6) return gameover();
+    if (attempts === 5) return gameover();
     attempts += 1;
     index = 0;
   };
@@ -58,7 +96,7 @@ function appStart() {
       block.style.color = "white";
       keyblock.style.color = "white";
     }
-    if (correct === 5) gameover();
+    if (correct === 5) correctAns();
     else nextLine();
   };
 
