@@ -1,5 +1,3 @@
-const ans = "APPLE";
-
 let attempts = 0;
 let index = 0;
 let timer;
@@ -9,7 +7,7 @@ function appStart() {
     const div = document.createElement("div");
     div.innerText = "game over";
     div.style =
-      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:50vw; background-color:white; width:200px; height:100px;";
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:43.5vw; background-color:white; width:200px; height:50px; font-weight: bold; font-size: 15px;";
     document.body.appendChild(div);
   };
 
@@ -25,8 +23,12 @@ function appStart() {
     index = 0;
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     let correct = 0;
+
+    //서버에서 정답을 받아오는 코드
+    const 응답 = await fetch("/answer");
+    const ans = await 응답.json();
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
@@ -34,15 +36,27 @@ function appStart() {
       );
 
       const input = block.innerText;
+
+      const keyblock = document.querySelector(
+        `.keyboard-column[data-key='${input}']`
+      );
+
       const rightAns = ans[i];
 
       if (input === rightAns) {
         correct += 1;
         block.style.background = "#6AAA64";
-      } else if (ans.includes(input)) block.style.background = "#C9B458";
-      else block.style.background = "#787C7E";
+        keyblock.style.background = "#6AAA64";
+      } else if (ans.includes(input)) {
+        block.style.background = "#C9B458";
+        keyblock.style.background = "#C9B458";
+      } else {
+        block.style.background = "#787C7E";
+        keyblock.style.background = "#787C7E";
+      }
 
       block.style.color = "white";
+      keyblock.style.color = "white";
     }
     if (correct === 5) gameover();
     else nextLine();

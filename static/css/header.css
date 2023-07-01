@@ -7,11 +7,14 @@
   border-bottom: 2px solid #d3d6da;
 }
 
-.top-image-left {
-  width: 25px;
+.top-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
 
-.top-image-right {
+.top-icon {
   width: 25px;
   display: flex;
   justify-content: center;
@@ -21,4 +24,8 @@
 .top-word {
   font-size: 30px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 0px 0px 50px;
 }
